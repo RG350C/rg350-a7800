@@ -1,0 +1,40 @@
+1.0.4
+
+- Optimizations to speed up the emulation, frame rate is now close to 
+  50 fps even at 200Mhz !
+- Bug fix in the file requester
+- L/R Trigger key can be used in the keyboard settings menu
+
+1.0.3
+
+- Many optimizations to speed up the emulation, frame rate is now 50 fps at
+  220Mhz in many games.
+- Auto-fire mode, press RTrigger+X to switch it on/off 
+  (useful for games such as xevious !)
+- Add new hotkeys :
+  . settings such as fps or render mode 
+    can now be directly modified inside the emulator 
+    (no need to enter in the settings menu)
+  . quick save / quick load current state 
+    (no need to enter in the main menu)
+  . setup auto fire speed
+- Default Hotkeys can now be set in the keyboard mapping menu (useful to add
+  hotkeys on existing/previous keyboard files)
+
+
+1.0.2
+
+- Merge diff from ProSystem v1.2
+- Improve speed
+- Improve emulation accuracy
+- Add MMU hack stuff
+- Add option to display frame rate
+- New speed limiter function
+- Improve volume handler
+- Linked with my patched version of SDL
+- New background image
+- Bug fix in file requester 
+
+1.0.1
+
+- Initial release
