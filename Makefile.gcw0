@@ -1,0 +1,101 @@
+#
+# Atari 2600 / Stella port on PSP 
+#
+# Copyright (C) 2009 Ludovic Jacomme (ludovic.jacomme@gmail.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+
+ATARI_VERSION=1.1.0
+
+TARGET = rg350-a7800
+EXESUFFIX = .dge
+
+# Add toolchain
+TOOLCHAIN = /opt/gcw0-toolchain/usr
+
+# Add C and C++ tools
+CC 		= $(TOOLCHAIN)/bin/mipsel-linux-gcc
+CXX		= $(TOOLCHAIN)/bin/mipsel-linux-g++
+STRIP	= $(TOOLCHAIN)/bin/mipsel-linux-strip
+
+# Add SDL dependencies
+SDL_LIB     = $(TOOLCHAIN)/lib
+SDL_INCLUDE = $(TOOLCHAIN)/include
+SDL_CONFIG  = $(TOOLCHAIN)/mipsel-gcw0-linux-uclibc/sysroot/usr/bin/sdl-config
+
+# Read SDL flags
+DEFAULT_CFLAGS = $(shell $(SDL_CONFIG) --cflags)
+
+MORE_CFLAGS = \
+	-I. -I$(SDL_INCLUDE) \
+	-DMPU_JZ4740 -mips32 -std=c++11 \
+ 	-Iemucore -Icommon -Ipsp -DPSP -DBSPF_PSP -DSOUND_SUPPORT \
+ 	-O3 -W -fsigned-char -ffast-math -fomit-frame-pointer -fno-strength-reduce \
+  -DNO_STDIO_REDIRECT -DDINGUX_MODE \
+  -DATARI_VERSION=\"$(ATARI_VERSION)\" 	
+
+CFLAGS = $(DEFAULT_CFLAGS) $(MORE_CFLAGS) 
+LDFLAGS = #-static -s
+
+LIBS += -L$(SDL_LIB) \
+-lSDL -lSDL_image \
+-lpng -ljpeg -lz -lm -lpthread -lstdc++ -ldl
+
+OBJS = gp2x_psp.o \
+  psp_main.o psp_kbd.o psp_sdl.o psp_font.o \
+  psp_fmgr.o psp_menu.o  psp_menu_kbd.o psp_menu_set.o \
+  psp_menu_help.o psp_sound.o \
+  Sound.o \
+  global.o \
+  psp_danzeff.o \
+  psp_atari.o \
+  Bios.o \
+  Database.o \
+  Common.o \
+  Cartridge.o \
+  Hash.o \
+  Logger.o \
+  Maria.o \
+  Memory.o \
+  Palette.o \
+  Pokey.o \
+  ProSystem.o \
+  Region.o \
+  Riot.o \
+  Sally.o \
+  Tia.o \
+  libzip/unzip.o \
+  libzip/ioapi.o \
+  libzip/zip.o \
+  Archive.o
+
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $@
+
+.cpp.o:
+	$(CXX) $(CFLAGS) -c $< -o $@
+
+$(TARGET)$(EXESUFFIX): $(OBJS)
+	$(CC) $(LDFLAGS) $(CFLAGS) $(OBJS) $(LIBS) -o $(TARGET)$(EXESUFFIX) && $(STRIP) $(TARGET)$(EXESUFFIX)
+
+install: $(TARGET)
+	cp $< /media/dingux/local/emulators/rg350-a7800/
+
+clean:
+	rm -f $(OBJS) $(TARGET)
+
+ctags: 
+	ctags *[ch] emucore/*[chp] common/*[chp]
