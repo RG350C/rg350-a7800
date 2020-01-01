@@ -121,3 +121,20 @@ Author of the PSP and GP2X ports version
   It has been developped under Linux using gcc with GP2XSDK. 
   
   To rebuild the homebrew run the Makefile in the src archive.
+
+# COMPILATION FOR GWC0/RG350 on LINUX
+  Developped under Linux Ubuntu / Visual Studio Code / GCC / GCW0 toolchain
+  http://www.gcw-zero.com/develop
+  
+    Compile:
+        ./build_gcw0.sh
+
+    Clean:
+        ./clean_gcw0.sh
+
+    Release: 
+        ./build_gcw0.sh create release file rg350-write.opk on ./build/ folder
+
+  Enjoy,
+  
+         Jorge Hontoria
