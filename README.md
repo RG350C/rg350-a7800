@@ -133,7 +133,7 @@ Author of the PSP and GP2X ports version
         ./clean_gcw0.sh
 
     Release: 
-        ./build_gcw0.sh create release file rg350-write.opk on ./build/ folder
+        ./build_gcw0.sh create release file rg350-a7800.opk on ./build/ folder
 
   Enjoy,
   
