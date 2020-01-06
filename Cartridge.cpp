@@ -220,6 +220,18 @@ bool cartridge_Load(std::string filename) {
   return true;
 }
 
+bool cartridge_Load_buffer(char* rom_buffer, int rom_size) {
+  cartridge_Release();
+  byte* data = (byte *)rom_buffer;
+  uint size = rom_size;
+
+  if(!cartridge_Load(data, size)) {
+    return false;
+  }
+  cartridge_filename = "";
+  return true;
+}
+
 // ----------------------------------------------------------------------------
 // Store
 // ----------------------------------------------------------------------------

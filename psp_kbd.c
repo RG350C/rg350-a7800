@@ -73,7 +73,7 @@
    "RIGHT",
    "DOWN",
    "LEFT",
-# if defined(DINGUX_MODE) 
+# if defined(DINGUX_MODE) || defined(GCW0_MODE)
    "X",      // Triangle
    "A",      // Circle
    "B",      // Cross
@@ -101,7 +101,7 @@
    "L_RIGHT",
    "L_DOWN",
    "L_LEFT",
-# if defined(DINGUX_MODE) 
+# if defined(DINGUX_MODE) || defined(GCW0_MODE)
    "L_X",      // Triangle
    "L_A",      // Circle
    "L_B",      // Cross
@@ -129,7 +129,7 @@
    "R_RIGHT",
    "R_DOWN",
    "R_LEFT",
-# if defined(DINGUX_MODE)
+# if defined(DINGUX_MODE) || defined(GCW0_MODE)
    "R_X",      // Triangle
    "R_A",      // Circle
    "R_B",      // Cross

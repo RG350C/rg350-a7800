@@ -33,6 +33,8 @@ static FILE* logger_file = NULL;
 # define logger_file stdout
 # endif
 
+#ifdef DEBUG
+
 // ----------------------------------------------------------------------------
 // GetTime
 // ----------------------------------------------------------------------------
@@ -142,3 +144,4 @@ void logger_Release( ) {
     fclose(logger_file);
   }
 }
+# endif

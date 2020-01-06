@@ -1,0 +1,75 @@
+#
+# ProSystem (Atari 7800 emulator) port on PSP 
+#
+# Copyright (C) 2006 Ludovic Jacomme (ludovic.jacomme@gmail.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+TARGET = psp7800
+PSPSDK = $(shell psp-config --pspsdk-path)
+PSPBIN = $(shell psp-config --psp-prefix)/bin
+SDL_CONFIG = $(PSPBIN)/sdl-config
+OBJS =  \
+  psp_main.o psp_kbd.o psp_sdl.o psp_font.o \
+  psp_fmgr.o psp_menu.o  psp_menu_kbd.o psp_battery.o psp_menu_set.o \
+  psp_menu_help.o psp_sound.o \
+  Sound.o \
+  global.o \
+  psp_danzeff.o \
+  psp_atari.o \
+  Bios.o \
+  Database.o \
+  Common.o \
+  Cartridge.o \
+  Hash.o \
+  Logger.o \
+  Maria.o \
+  Memory.o \
+  Palette.o \
+  Pokey.o \
+  ProSystem.o \
+  Region.o \
+  Riot.o \
+  Sally.o \
+  Tia.o \
+  libzip/unzip.o \
+  libzip/ioapi.o \
+  libzip/zip.o \
+  Archive.o
+
+DEFAULT_CFLAGS = $(shell $(SDL_CONFIG) --cflags)
+
+MORE_CFLAGS = -I. -Ilibzip -O3 
+#-DNO_STDIO_REDIRECT
+
+CFLAGS = $(DEFAULT_CFLAGS) $(MORE_CFLAGS)
+CXXFLAGS = $(DEFAULT_CFLAGS) $(MORE_CFLAGS) -fno-exceptions -fno-rtti
+
+LIBS += -lSDL_image -lSDL -lpng -ljpeg -lpspaudio -lpspgu -lpsppower -lpsphprm -lz -lm -lstdc++
+
+EXTRA_TARGETS = EBOOT.PBP
+PSP_EBOOT_TITLE = PSP7800
+PSP_EBOOT_ICON= psp7800.png
+PSP_EBOOT_PIC1 = psp7800-pic.png
+
+include $(PSPSDK)/lib/build.mak
+
+install: kxploit
+	cp __SCE__psp7800/EBOOT.PBP /media/usbdisk/psp/game150/__SCE__psp7800/
+	cp %__SCE__psp7800/EBOOT.PBP /media/usbdisk/psp/game150/%__SCE__psp7800/
+
+realclean:
+	/bin/rm -f $(OBJS) EBOOT.PBP PARAM.SFO __SCE__psp7800/EBOOT.PBP %__SCE__psp7800/EBOOT.PBP psp7800.elf
+

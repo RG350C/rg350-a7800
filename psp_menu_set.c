@@ -316,7 +316,7 @@ psp_settings_menu_exit(void)
   gp2xCtrlData c;
 
   psp_display_screen_settings_menu();
-  psp_sdl_back2_print(170, 110, "press X to confirm !", PSP_MENU_WARNING_COLOR);
+  psp_sdl_back2_print(170, 110, "press B to confirm !", PSP_MENU_WARNING_COLOR);
   psp_menu_dirty = 1;
   psp_sdl_flip();
 

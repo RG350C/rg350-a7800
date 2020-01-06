@@ -57,7 +57,7 @@ typedef struct gp2xCtrlData {
 #define GP2X_VOLUP           (16)
 #define GP2X_VOLDOWN         (17)
 
-#elif defined(DINGUX_MODE)
+#elif defined(DINGUX_MODE) || defined(GCW0_MODE)
 
 #define GP2X_UP              (103)
 #define GP2X_DOWN            (108)

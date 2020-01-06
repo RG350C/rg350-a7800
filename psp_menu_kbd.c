@@ -73,7 +73,7 @@
     "Down     :",
     "Left     :",
     "Right    :",
-# if defined(DINGUX_MODE)
+# if defined(DINGUX_MODE) || defined(GCW0_MODE)
    { "B        :" },
    { "Y        :" },
    { "X        :" },

@@ -254,6 +254,7 @@ psp_atari_main_loop()
   if (bios_Load("./7800.rom")) {
     bios_enabled = true;
   }
+  
   /* Open default rom */
   if (psp_atari_load_rom("./default.a78")) {
     psp_sdl_exit(1);

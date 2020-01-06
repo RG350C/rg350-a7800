@@ -36,6 +36,7 @@ typedef unsigned char byte;
 typedef unsigned short word;
 typedef unsigned int uint;
 
+#ifdef DEBUG
 extern bool logger_Initialize( );
 extern bool logger_Initialize(std::string filename);
 extern void logger_LogError(std::string message);
@@ -45,6 +46,17 @@ extern void logger_LogInfo(std::string message, std::string source);
 extern void logger_LogDebug(std::string message);
 extern void logger_LogDebug(std::string message, std::string source);
 extern void logger_Release( );
+#else
+static inline bool logger_Initialize() { return false; }
+static inline bool logger_Initialize(std::string filename) { return false; }
+static inline void logger_LogError(std::string message) {}
+static inline void logger_LogError(std::string message, std::string source) {}
+static inline void logger_LogInfo(std::string message) {}
+static inline void logger_LogInfo(std::string message, std::string source) {}
+static inline void logger_LogDebug(std::string message) {}
+static inline void logger_LogDebug(std::string message, std::string source) {}
+static inline void logger_Release( ) {}
+#endif
 extern byte logger_level;
 
 #endif

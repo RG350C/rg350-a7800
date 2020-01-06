@@ -26,6 +26,7 @@
 #define COMMON_H
 
 #include <string>
+#include <stdlib.h>
 
 typedef unsigned char byte;
 typedef unsigned short word;

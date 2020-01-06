@@ -1,10 +1,9 @@
 [Desktop Entry]
-Name=Atari 7800 Adv
+Name=Atari 7800
 Comment=Atari 7800 Advanced emulator 
-Exec=rg350-a7800.dge %f
+Exec=rg350-a7800.dge
 Terminal=false
 Type=Application
-MimeType=application/x-a78;
 StartupNotify=true
 Icon=icon
 Categories=emulators;

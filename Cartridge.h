@@ -51,6 +51,7 @@ typedef unsigned short word;
 typedef unsigned int uint;
 
 extern bool cartridge_Load(std::string filename);
+extern bool cartridge_Load_buffer(char* rom_buffer, int rom_size);
 extern void cartridge_Store( );
 extern void cartridge_StoreBank(byte bank);
 extern void cartridge_Write(word address, byte data);
